@@ -6,6 +6,7 @@ var path = require('path');
 var appDir = path.dirname(require.main.filename);
 var {Article} = require("../models/article.js");
 var {Category} = require("../models/category.js");
+var mv = require("mv");
 
 router.get("/", (req, res) => {
 	var postsQuery = null;
@@ -114,23 +115,26 @@ router.post("/create", (req, res) => {
       	let oldpath = files.image.path;
       	let newFileName = Date.now() +files.image.name;
       	let newpath = appDir + '/public/img/news/' + newFileName;
-      	fs.rename(oldpath, newpath, function (err) {
-        	if (err) 
-        		throw err;
-        	let news = {
-        		title: fields.title,
-        		text: fields.text,
-        		images: [newFileName],
-        		category: fields.category,
-        		author: req.session.user._id,
-        		created: Date.now()
-        	};
-        	Article.create(news, (err, created) => {
-        		if(err)
-        			throw err;
-        		return res.redirect("/users");
-        	});
-      	});
+        mv(oldpath, newpath, (err) => {
+            if (err) 
+                throw err;
+            let news = {
+                title: fields.title,
+                text: fields.text,
+                images: [newFileName],
+                category: fields.category,
+                author: req.session.user._id,
+                created: Date.now()
+            };
+            Article.create(news, (err, created) => {
+                if(err)
+                    throw err;
+                return res.redirect("/users");
+            });
+        });
+      	//fs.rename(oldpath, newpath, function (err) {
+        	
+      	//});
     });
 });
 
