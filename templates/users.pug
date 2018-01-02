@@ -1,0 +1,11 @@
+extends layout
+
+block content
+	if user
+		h3= user.email
+	each val, index in users
+		h1= val.name
+		h1= val.surname
+		h1= val.email
+		h1= val.password
+		hr

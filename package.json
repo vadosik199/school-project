@@ -1,0 +1,28 @@
+{
+  "name": "school_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "connect-mongo": "^2.0.0",
+    "connect-mongodb": "^1.1.5",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "formidable": "^1.1.1",
+    "jstransformer-babel": "^2.1.0",
+    "l": "^0.6.0",
+    "mongoose": "^5.0.0-rc0",
+    "pug": "^2.0.0-rc.4",
+    "timeago.js": "^3.0.2"
+  },
+  "engines": {
+    "node": "8.9.3",
+    "npm": "5.5.1"
+  }
+}
