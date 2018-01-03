@@ -8,19 +8,20 @@ block content
 						each post in posts
 							div.post.col-xl-6
 								div.post-thumbnail
-									a(href="#")
+									a(href="/posts/id/" + post._id)
 										img(src="/img/news/" + post.images[0]).img-fluid
 								div.post-details
 									div.post-meta.d-flex.justify-content-between
 										div.date.meta-last
 										div.category
-											a(href="#") #{post.category.title}
-									a(href="/posts/id/" + post._id)
+											a(href="/posts?category=" + post.category._id) #{post.category.title}
+									a(title= post.title href="/posts/id/" + post._id)
 										h3.h4 #{post.title}
 									footer.post-footer.d-flex.align-items-center
 										a(href="#").author.d-flex.align-items-center.flex-wrap
 											div.avatar
-												img(src="/img/news/"+post.images[0]).img-fluid
+												if !post.author.photo
+													img(src="/img/user.svg").img-fluid
 											div.title
 												span #{post.author.surname} #{post.author.name}
 										div.date
@@ -29,7 +30,7 @@ block content
 										div.comments.meta-last
 											i.icon-comment
 											.
-												12
+												#{post.comments.length}
 			aside.col-lg-4
 				include search-aside.pug
 				include latest-posts-aside.pug

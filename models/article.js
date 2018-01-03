@@ -29,7 +29,11 @@ const ArticleSchema = new Schema({
 	created: {
 		type: Date,
 		default: Date.now()
-	}
+	},
+	comments: [ {
+		type: Schema.Types.ObjectId,
+		ref: "Comment"
+	} ]
 });
 
 var article = mongoose.model("Article", ArticleSchema);

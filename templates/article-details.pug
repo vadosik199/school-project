@@ -25,9 +25,7 @@ block content
 										i.icon-comment
 										.
 											12
-							div.post-body
-							.
-								!{post.text}
+							div.post-body!= post.text
 							div.posts-nav.d-flex.justify-content-between.align-items-stretch.flex-column.flex-md-row
 								if previous != null
 									a(href="/posts/id/" + previous._id).prev-post.text-left.d-flex.align-items-center
@@ -43,6 +41,44 @@ block content
 											h6= next.title
 										div.icon.next
 											i.fa.fa-angle-right
+							div.post-comments
+								h3.h6 Коментарі
+									span.no-of-comments #{post.comments.length}
+								each comment in post.comments
+									div.comment
+										div.comment-header.d-flex.justify-content-between
+											div.user.d-flex.align-items-center
+												div.image
+													if !comment.author
+														img(src="/img/user.svg").img-fluid.rounded-circle
+													else if !comment.author.photo
+														img(src="/img/user.svg").img-fluid.rounded-circle
+													else
+														img(src="/img/users/" + comment.author.photo).img-fluid.rounded-circle
+												div.title
+													strong
+														if !comment.author
+															| #{comment.authorName}
+														else
+															| #{comment.author.surname} #{comment.author.name}
+													span(datetime= comment.date).posted-date.date
+										div.comment-body
+											p= comment.text
+							div.add-comment
+								header
+									h3.h6 Додати коментар
+								form(action="/comments/add" method="POST").commenting-form
+									div.row
+										if !user
+											div.form-group.col-md-6
+												input(type="text" name="username" id="username" placeholder="Ім'я").form-control
+											div.form-group.col-md-6
+												input(type="email" name="email" id="useremail" placeholder="Електронна скринька (не буде опубліковано)").form-control
+										div.form-group.col-md-12
+											textarea(name="usercomment" id="usercomment" placeholder="Введіть текст коментарю").form-control
+											input(type="hidden" name="postId" value="" + post._id)
+										div.form-group.col-md-12
+											button(type="submit").btn.btn-secondary Відправити коментар
 			aside.col-lg-4
 				include search-aside.pug
 				include latest-posts-aside.pug

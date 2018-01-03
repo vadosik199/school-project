@@ -20,12 +20,17 @@ block content
 								footer.post-footer.d-flex.align-items-center
 									a(href="#").author.d-flex.align-items-center.flex-wrap
 										div.avatar
-											img(src="/img/news/"+ val.images[0]).img-fluid
+											if !val.author.photo
+												img(src="/img/user.svg").img-fluid
 										div.title
 											span #{val.author.surname}  #{val.author.name}
 										div.date
 											i.icon-clock
 											span(datetime= val.created).posted-date
+										div.comments.meta-last
+											i.icon-comment
+											.
+												#{val.comments.length}
 					if index%2 == 0
 						div.image.col-lg-5
 							img(src="/img/news/" + val.images[0]).post-img

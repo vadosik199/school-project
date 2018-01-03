@@ -55,6 +55,13 @@ router.get("/id/:id", (req, res) => {
     Article.find({_id: req.params.id})
         .populate("author")
         .populate("category")
+        .populate("comments")
+        .populate({
+            path: "comments",
+            populate: {
+                path: "author"
+            }
+        })
         .exec((err, article)=> {
             if(err)
                 throw err;
@@ -67,19 +74,16 @@ router.get("/id/:id", (req, res) => {
                     Category.find({}).exec((err,categories) => {
                         if(err)
                             throw err;
-                        console.log(article);
                         Article.findOne({created: {$lt: article.created}})
                             .sort({created: -1})
                             .exec((err, previous) => {
                                 if(err)
                                     throw err;
-                                console.log(previous);
                                 Article.findOne({_id: {$gt: article._id}})
                                     .sort({_id: 1 })
                                     .exec((err, next) => {
                                         if(err)
                                             throw err;
-                                        console.log(next);
                                         res.render("article-details", {
                                             title: article.title,
                                             post: article[0],

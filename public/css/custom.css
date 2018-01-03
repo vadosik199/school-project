@@ -76,8 +76,36 @@
 	max-width: 200px;
 }
 
-.featured-posts .content div {
+.featured-posts .content > div {
 	max-height: 90px;
+	max-width:550px !important;
 	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.main-logo {
+	width: 70px;
+	height:70px;
+	object-fit: cover;
+	object-position: center;
+	border-radius: 50%;
+}
+
+body > header .navbar {
+	padding: 0px 15px !important;
+}
+
+.post-body img{
+	width:100% !important;
+	height: auto!important;
+	object-fit: cover;
+	object-position: center;
+}
+
+.latest-posts .title strong {
+	max-width: 200px;
+	display: inline-block;
+	overflow: hidden;
+	white-space: nowrap;
 	text-overflow: ellipsis;
 }

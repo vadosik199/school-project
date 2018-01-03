@@ -35,6 +35,7 @@ app.use('/', require('./routs/home'));
 app.use('/posts', require('./routs/article'));
 app.use('/users', require('./routs/user'));
 app.use('/categories', require('./routs/category'));
+app.use('/comments', require('./routs/comment'));
 
 var port = process.env.PORT || 5000;
 Database.connect("mongodb://vadosik9:vadim1976111SZ@ds046047.mlab.com:46047/school", (err) => {
