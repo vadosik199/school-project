@@ -22,6 +22,8 @@ block content
 										div.avatar
 											if !val.author.photo
 												img(src="/img/user.svg").img-fluid
+											else
+												img(src="/img/users/" + val.author.photo).img-fluid
 										div.title
 											span #{val.author.surname}  #{val.author.name}
 										div.date
